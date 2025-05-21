@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
+import { executeQuery } from '../db';
 
 function QueryView() {
   const [sqlInput, setSqlInput] = useState('SELECT * FROM patients;');
+  const [results, setResults] = useState(null);
 
-  const handleExecuteQuery = () => {
-    setCurrentQuery(sqlInput);
+  const handleExecuteQuery = async () => {
+    try {
+      // sanitize the sql input to only allow select statements
+      // check if sql statement starts with select skip case sensitivity
+      if (!sqlInput.toLowerCase().trim().startsWith('select')) {
+        alert ('Only select statements are allowed');
+        return;
+      }
+      const result = await executeQuery(sqlInput);
+      console.log(result);
+      setResults(result);
+    } catch (error) {
+      console.error('Error executing query:', error);
+    }
   };
-
-  let results = null;
 
   return (
     <div>
@@ -20,30 +32,28 @@ function QueryView() {
       />
       <button onClick={handleExecuteQuery}>Execute SQL</button>
 
-      {results && results.rows && (
+      {results && results.success && (
         <div style={{ marginTop: '20px' }}>
           <h3>Results:</h3>
-          {results.rows.length === 0 ? (
-            <p>No results found.</p>
-          ) : (
+          {(
             <table>
               <thead>
                 <tr>
-                  {results.fields.map((field) => (
-                    <th key={field.name}>{field.name}</th>
-                  ))}
+                  <th>name</th>
+                  <th>dob</th>
+                  <th>address</th>
+                  <th>phone</th>
+                  <th>email</th>
                 </tr>
               </thead>
               <tbody>
-                {results.rows.map((row, rowIndex) => (
+                {results.data.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    {results.fields.map((field) => (
-                      <td key={field.name}>
-                        {row[field.name] instanceof Date
-                          ? row[field.name].toLocaleDateString()
-                          : String(row[field.name])} 
-                      </td>
-                    ))}
+                    <td>{row.name}</td>
+                    <td>{row.dob?.toLocaleDateString()}</td>
+                    <td>{row.address}</td>
+                    <td>{row.phone}</td>
+                    <td>{row.email}</td>
                   </tr>
                 ))}
               </tbody>

@@ -2,10 +2,11 @@ import { Routes, Route, Link } from 'react-router-dom';
 import PatientRegistration from './components/PatientRegistration';
 import QueryView from './components/QueryView';
 import './App.css';
+import { DatabaseProvider } from './DbContext';
 
 function App() {
   return (
-    <>
+      <DatabaseProvider>
       <nav>
         <ul>
           <li>
@@ -22,7 +23,7 @@ function App() {
           <Route path="/query" element={<QueryView />} />
         </Routes>
       </main>
-    </>
+    </DatabaseProvider>
   );
 }
 
