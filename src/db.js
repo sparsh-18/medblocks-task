@@ -1,9 +1,9 @@
 import { PGliteWorker } from '@electric-sql/pglite/worker';
-
+import Worker from "./pglite-worker.js?worker"
 let db = null;
 
 const initSchema = async (database) => {
-    await database.query(`
+    await database.exec(`
     CREATE TABLE IF NOT EXISTS patients (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -24,9 +24,7 @@ export const initDatabase = async () => {
         try {
             const url = `./pglite-worker.js`;
             console.log(url);
-            const workerInstance = new Worker(new URL(url, import.meta.url), {
-                type: 'module',
-            });
+            const workerInstance = new Worker();
             db = new PGliteWorker(workerInstance);
             await initSchema(db);
         } catch (error) {

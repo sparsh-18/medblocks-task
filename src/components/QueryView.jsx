@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import { executeQuery } from '../db';
+import { useDatabaseContext } from '../DbContext';
 
 function QueryView() {
   const [sqlInput, setSqlInput] = useState('SELECT * FROM patients;');
   const [results, setResults] = useState(null);
+
+  const { isInitialized } = useDatabaseContext();
+
+  if (!isInitialized) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <h2>loading db...</h2>
+      </div>
+    );
+  }
 
   const handleExecuteQuery = async () => {
     try {
