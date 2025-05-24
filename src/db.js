@@ -22,9 +22,9 @@ const initSchema = async (database) => {
 export const initDatabase = async () => {
     if (!db) {
         try {
-            const url = `./pglite-worker.js`;
-            console.log(url);
-            const workerInstance = new Worker();
+            const workerInstance = new Worker({
+                type: 'module',
+            });
             db = new PGliteWorker(workerInstance);
             await initSchema(db);
         } catch (error) {
