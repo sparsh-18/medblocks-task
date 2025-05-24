@@ -1,12 +1,59 @@
-# React + Vite
+# Medblocks Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal React app to register and query patients.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these steps to set up and run the project locally.
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [Node.js](https://nodejs.org/) (version 14 or higher recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/sparsh-18/medblocks-task.git
+cd medblocks-task
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Run the Development Server
+```bash
+npm run dev
+```
+Open your browser and navigate to http://localhost:5173 to view the application.
+
+### 4. Build for Production and Preview
+```bash
+npm run build
+npm run preview
+```
+Open your browser and navigate to http://localhost:4173 to view the application.
+
+## 🛠 Project Structure
+```
+medblocks-task/
+├── public/               # Static assets
+├── src/                  # Source code
+│   └── main.jsx          # Entry point
+├── index.html            # HTML template
+├── package.json          # Project metadata and scripts
+├── vite.config.js        # Vite configuration
+├── eslint.config.js      # ESLint configuration
+└── README.md             # Project documentation
+```
+
+## 📦 Dependencies
+
+- [React](https://reactjs.org/)
+- [React DOM](https://reactjs.org/docs/react-dom.html)
+- [Vite](https://vitejs.dev/)
+- [ESLint](https://eslint.org/)
+- [@eslint/js](https://www.npmjs.com/package/@eslint/js)
+- [eslint-plugin-react](https://www.npmjs.com/package/eslint-plugin-react)
